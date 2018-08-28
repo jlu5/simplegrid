@@ -136,11 +136,6 @@ class Grid():
             print('|')
             print('|%s' % ('-' * self.largestlength) * self.width + '|')
 
-    def __iter__(self):
-        """Implements the iterable interface: list(grid), for point in grid, etc."""
-        for item in self._grid:
-            yield item
-
     def __repr__(self):
         """Overrides string conversion to show the Grid's elements."""
         return "Grid(%s)" % self._grid
