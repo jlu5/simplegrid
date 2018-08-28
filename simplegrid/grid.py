@@ -245,5 +245,13 @@ class SerpentineGrid(Grid):
         """Returns all the items in the grid."""
         return self._grid
 
+    def by_rows(self):
+        """Returns the items in the grid as a list of lists, with each inner list
+        representing a row."""
+        resultgrid = []
+        for y in range(self.height):
+            resultgrid.append([self.get(x, y) for x in range(self.width)])
+        return resultgrid
+
 if __name__ == '__main__':
     print("This module provides no command line functions.")
