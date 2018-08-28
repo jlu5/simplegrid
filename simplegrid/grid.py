@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ###
 
-"""Grid system using nested lists (version 2)."""
+"""Classes to represent Cartesian grids."""
 
 from __future__ import print_function
 import itertools
