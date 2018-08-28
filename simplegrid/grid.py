@@ -48,9 +48,9 @@ class Grid():
             [(0, 2), (1, 2), (2, 2)]]
         """
         if data is None:
-            self.grid = [['' for _ in xrange(width)] for _ in xrange(height)]
+            self._grid = [['' for _ in xrange(width)] for _ in xrange(height)]
         else:
-            self.grid = data
+            self._grid = data
         self.width = width
         self.height = height
 
@@ -64,7 +64,7 @@ class Grid():
         """
         Fetches the value of the point at (x, y) using a Cartesian grid system.
         """
-        return self.grid[y][x]
+        return self._grid[y][x]
 
     def get(self, x, y):
         """Returns the contents of the grid item at (x, y)."""
@@ -78,7 +78,7 @@ class Grid():
         """
         Sets the point at (x, y) to the given object.
         """
-        self.grid[y][x] = obj
+        self._grid[y][x] = obj
 
     def set(self, x, y, obj, allowOverwrite=False):
         """Sets the contents of the grid item at (x, y)."""
@@ -138,16 +138,16 @@ class Grid():
 
     def __iter__(self):
         """Implements the iterable interface: list(grid), for point in grid, etc."""
-        for item in self.grid:
+        for item in self._grid:
             yield item
 
     def __repr__(self):
         """Overrides string conversion to show the Grid's elements."""
-        return "Grid(%s)" % self.grid
+        return "Grid(%s)" % self._grid
 
     def all_items(self):
         """Returns all the items in the grid, reduced into one list."""
-        return list(itertools.chain.from_iterable(self.grid))
+        return list(itertools.chain.from_iterable(self._grid))
 
 class SerpentinePattern(enum.Enum):
     """Enum referring to serpentine pattern start points common in LED matrix boards."""
@@ -174,9 +174,9 @@ class SerpentineGrid(Grid):
         super().__init__(width=width, height=height)
         # Our backend in this case will just be one long array.
         if data is None:
-            self.grid = ['' for _ in xrange(width*height)]
+            self._grid = ['' for _ in xrange(width*height)]
         else:
-            self.grid = data
+            self._grid = data
 
         self.pattern = pattern
 
@@ -206,18 +206,18 @@ class SerpentineGrid(Grid):
         Fetches the value of the point at (x, y) using a Serpentine grid system.
         """
         coord = self._get_serpentine_point(x, y)
-        return self.grid[coord]
+        return self._grid[coord]
 
     def _set_coordinate(self, x, y, obj):
         """
         Sets the point at (x, y) to the given object.
         """
         coord = self._get_serpentine_point(x, y)
-        self.grid[coord] = obj
+        self._grid[coord] = obj
 
     def all_items(self):
         """Returns all the items in the grid."""
-        return self.grid
+        return self._grid
 
 if __name__ == '__main__':
     print("This module provides no command line functions.")
