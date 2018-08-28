@@ -30,6 +30,12 @@ class GridItemFilledError(ValueError):
     # Raised when a grid point we requested is already filled.
     pass
 
+class CartesianDirection(enum.Enum):
+    LEFT = 1
+    RIGHT = 2
+    UP = 3
+    DOWN = 4
+
 class Grid():
     """Grid system using nested lists."""
     def __init__(self, width=3, height=3, data=None):
@@ -143,6 +149,31 @@ class Grid():
     def all_items(self):
         """Returns all the items in the grid, reduced into one list."""
         return list(itertools.chain.from_iterable(self._grid))
+
+    def by_rows(self):
+        """Returns the items in the grid as a list of lists, with each inner list
+        representing a row."""
+        return self._grid
+
+    def next_in_direction(self, x, y, direction):
+        """Returns the grid point one in the specified direction, or raise
+        IndexError if that is out of the grid."""
+        new_x, new_y = x, y
+        if direction == CartesianDirection.LEFT:
+            new_x -= 1
+        elif direction == CartesianDirection.RIGHT:
+            new_x += 1
+        elif direction == CartesianDirection.UP:
+            new_y -= 1
+        elif direction == CartesianDirection.DOWN:
+            new_y += 1
+
+        if new_x < 0 or new_x >= self.width:
+            raise IndexError("Width out of grid range")
+        elif new_y < 0 or new_y >= self.height:
+            raise IndexError("Height out of grid range")
+
+        return (new_x, new_y)
 
 class SerpentinePattern(enum.Enum):
     """Enum referring to serpentine pattern start points common in LED matrix boards."""
