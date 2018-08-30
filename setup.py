@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 VERSION = "0.1"
 
@@ -12,8 +12,8 @@ setup(
 
     author='James Lu',
     author_email='james@overdrivenetworks.com',
-    
+
     license='GPL 3',
-    
-    packages=find_packages()
+
+    packages=['simplegrid']
 )
