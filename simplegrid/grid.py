@@ -21,6 +21,7 @@ from __future__ import print_function
 import itertools
 import sys
 import enum
+import functools
 
 if sys.version_info[0] >= 3:
     raw_input = input
@@ -206,6 +207,7 @@ class SerpentineGrid(Grid):
 
         self.pattern = pattern
 
+    @functools.lru_cache(maxsize=1024)
     def _get_serpentine_point(self, x, y):
         """
         Fetches the array index of the point (x, y) using a Serpentine grid system.
