@@ -19,8 +19,8 @@ from .grid import SerpentineGrid
 
 class LEDGrid(SerpentineGrid):
     """Class to represent a grid of RGB LEDs (like ws281x LED matrices)."""
-    def __init__(self, ws281x, pattern, width=16, height=16, data=None):
-        super().__init__(pattern, width=width, height=height, data=None)
+    def __init__(self, ws281x, pattern, width=16, height=16, **kwargs):
+        super().__init__(pattern, width=width, height=height, **kwargs)
         self._ws281x = ws281x
 
     def set(self, x, y, obj, **kwargs):

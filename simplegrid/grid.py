@@ -38,7 +38,7 @@ class CartesianDirection(enum.Enum):
 
 class Grid():
     """Grid system using nested lists."""
-    def __init__(self, width=3, height=3, data=None):
+    def __init__(self, width=3, height=3, data=None, default_value=None):
         """
         Initialize the grid. For the Cartesian grid, the backend is a list of lists:
         each row is a list element inside the outside list, and its elements refer
@@ -54,7 +54,7 @@ class Grid():
             [(0, 2), (1, 2), (2, 2)]]
         """
         if data is None:
-            self._grid = [['' for _ in xrange(width)] for _ in xrange(height)]
+            self._grid = [[default_value for _ in xrange(width)] for _ in xrange(height)]
         else:
             self._grid = data
         self.width = width
@@ -196,11 +196,11 @@ class SerpentinePattern(enum.Enum):
     TOP_RIGHT = 2
 
 class SerpentineGrid(Grid):
-    def __init__(self, pattern, width=3, height=3, data=None):
-        super().__init__(width=width, height=height)
+    def __init__(self, pattern, width=3, height=3, data=None, default_value=None):
+        super().__init__(width=width, height=height, default_value=default_value)
         # Our backend in this case will just be one long array.
         if data is None:
-            self._grid = ['' for _ in xrange(width*height)]
+            self._grid = [default_value for _ in xrange(width*height)]
         else:
             self._grid = data
 
